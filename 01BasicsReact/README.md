@@ -15,4 +15,8 @@ Currently, two official plugins are available:
 4. run your app
 
 
+# How to create your own file using .jsx
+1. vite require file name in uppercase format (in directory it can start with lowercase but good practice is to use uppercase)
+2. and the the file should have .jsx extension
+
 
