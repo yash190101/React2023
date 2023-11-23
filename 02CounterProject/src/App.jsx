@@ -1,32 +1,30 @@
-import { useState } from 'react';
+import { useState } from 'react'
 import './App.css'
 
 function App() {
+
+  let [counter,setCounter] = useState(10)
   
-  let [counter,setCounter ] = useState(10)
-
-  const increase = () => {
-    if (counter < 20) {
-      counter++
-      setCounter(counter)
-    }
+  let increase = () =>{
+    setCounter(counter + 1)
   }
 
-  const decrease = () => {
-    if (counter > 0) {
-      counter--
-      setCounter(counter)  
-    }
+  let decrease = () =>{
     
+    setCounter(counter - 1)
   }
+
+
+
+
 
   return (
     <>
-      
-      <h1>Hello From Yash</h1>
-      <h2>Counter value is {counter}</h2>
-      <button onClick = {increase} >Increase {counter}</button> <hr />
-      <button onClick = {decrease} >Decrease {counter}</button>
+     <h1>Counter Project</h1>
+     <h2>Hello From Yash {counter}</h2>
+     <h3>Counter is {counter}</h3>
+     <button onClick={increase}>Increase {counter}</button> <hr />
+     <button onClick={decrease}>Decrease {counter}</button>
     </>
   )
 }
