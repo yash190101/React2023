@@ -7,6 +7,17 @@ function App() {
   const [numAllowed,setNumAllowed] = useState(false)
   const [charAllowed,setCharAllowed] = useState(false)
   const [password,setPassword] = useState("")
+  const [clicked,setClicked] = useState(false)
+  const buttonStyle = {
+    backgroundColor: clicked ? 'green' : 'orange',
+    color: '#fff',
+    padding: '10px 20px',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    // Add more styles as needed
+  };
+
+
 
   const generatePassword = useCallback(() =>{
 
@@ -28,6 +39,7 @@ function App() {
 
   useEffect(()=>{
     generatePassword()
+    setClicked(false)
   },[length,numAllowed,charAllowed,generatePassword])
 
   const copyPassword = useRef()
@@ -36,6 +48,7 @@ function App() {
 
     copyPassword.current?.select()
     window.navigator.clipboard.writeText(password)
+    setClicked(true)
 
   },[password])
 
@@ -54,7 +67,7 @@ function App() {
             ref={copyPassword}
           />
           
-          <button className=' mx-3 rounded-lg px-4 py-2 text-black bg-orange-300' onClick={copyPasswordToClipboard}>Copy</button>
+          <button className=' mx-3 rounded-lg px-4 py-2 text-black bg-orange-300' onClick={copyPasswordToClipboard} style={buttonStyle}>{clicked ? 'Copied' : 'Copy'}</button>
         </div>
 
         <div className='flex text-sm gap-x-2 py-4'>

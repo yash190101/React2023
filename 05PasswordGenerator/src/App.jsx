@@ -6,6 +6,15 @@ function App() {
   const [numEnable,setNumEnable] = useState(false)
   const [charEnable,setCharEnable] = useState(false)
   const [password,setPassword] = useState("")
+  const [copyClicked,setCopyClicked] = useState(false)
+  
+  const buttonStyle = {
+    backgroundColor: copyClicked ? 'green' : 'rgb(249 115 22 / var(--tw-bg-opacity))',
+    color: '#000',
+    padding: '10px 20px',
+    borderRadius: '5px',
+    cursor: 'pointer',
+  }
 
   const generatePassword = useCallback(() =>{
       let pass = ""
@@ -18,11 +27,12 @@ function App() {
         pass += str.charAt(random) 
       }
       setPassword(pass)
-
+      setCopyClicked(false)
     },[length,numEnable,charEnable,setPassword])
   
     useEffect(()=>{
       generatePassword()
+      setCopyClicked(false)
     },[length,numEnable,charEnable,generatePassword])
 
     const copyPassword = useRef(null)
@@ -30,10 +40,11 @@ function App() {
     const copyPasswordToClipboard = useCallback(()=>{
       copyPassword.current?.select()
       window.navigator.clipboard.writeText(password)
-    },[])
+      setCopyClicked(true)
+    },[password])
   return (
     <>
-    <div className='text-center  text-orange-600 bg-gray-800 px-3 py-2 shadow rounded-lg overflow-hidden mb-4'>
+    <div className='main text-center  text-orange-600 bg-gray-800 px-3 py-2 shadow rounded-lg overflow-hidden mb-4'>
       <h1 className='text-4xl text-center text-white my-3'>Password Generator</h1>
 
         <div className='flex text-center  text-orange-600 bg-gray-800 px-3 py-2 shadow rounded-lg overflow-hidden mb-4'> 
@@ -45,8 +56,8 @@ function App() {
             readOnly
             ref={copyPassword}
           />
-          <button className=' mx-3 rounded-lg px-2 py-2 text-black bg-orange-300' onClick={generatePassword}>Generate</button>
-          <button className=' rounded-lg px-2 py-2  text-black bg-orange-300' onClick={copyPasswordToClipboard} > Copy</button>
+          <button className=' mx-3 rounded-lg px-2 py-2 text-black bg-orange-500' onClick={generatePassword}>Generate</button>
+          <button className=' mr-3 rounded-lg px-2 py-2  text-black bg-orange-500' style={buttonStyle} onClick={copyPasswordToClipboard} >{copyClicked? 'Copied!' : 'Copy'}</button>
         </div>
 
         <div className='flex text-sm gap-x-2 py-4'>
@@ -54,7 +65,7 @@ function App() {
             <input 
             type="range"
             min={8}
-            max={50}
+            max={32}
             value={length}
             className=' cursor-pointer'
             onChange={(e)=>{setLength(e.target.value)}} 
