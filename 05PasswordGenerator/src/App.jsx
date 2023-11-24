@@ -67,7 +67,7 @@ function App() {
             min={8}
             max={32}
             value={length}
-            className=' cursor-pointer'
+            className=' cursor-pointer mx-3'
             onChange={(e)=>{setLength(e.target.value)}} 
             
             /><label className=' text-orange-500 '>Length : {length}</label>
