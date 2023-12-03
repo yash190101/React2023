@@ -1,17 +1,18 @@
-import { useState } from 'react'
+
 import './App.css'
 
 function App() {
-  const [backgroundColor,setBackgroundColor] = useState('white')
+  document.body.style.backgroundColor = '#49223E'
   const changeColor = (color)=>{
-   //setBackgroundColor(color)
+   
    document.body.style.backgroundColor = color
   }
 
 
   return (
     <>
-      <div className='container' style={{backgroundColor}} >
+      
+      <div className='container' style={{backgroundColor : 'white'}}>
         <button onClick={()=>changeColor('red')} style={{backgroundColor : 'red',color : 'black'}}>red</button>
         <button onClick={()=>changeColor('blue')} style={{backgroundColor : 'blue',color : 'black'}}>blue</button>
         <button onClick={()=>changeColor('lavender')} style={{backgroundColor : 'lavender',color : 'black'}}>lavender</button>
@@ -19,6 +20,7 @@ function App() {
         <button onClick={()=>changeColor('pink')} style={{backgroundColor : 'pink',color : 'black'}}>pink</button>
         
       </div>
+      
     </>
   )
 }
